@@ -7,10 +7,10 @@ let connection
 function connectDataBase() {
     //连接数据库数据
     connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'gu413286',
-        database: 'test'
+        host: '47.114.164.51',
+        user: 'gc',
+        password: 'Gu413286',
+        database: 'blog'
     });
     connection.connect();
 }
