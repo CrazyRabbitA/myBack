@@ -74,7 +74,9 @@ router.post('/updateMenu', (req, res, next) => {
 //查询菜单
 router.get('/getMenu', (req, res, next) => {
     //获取数据库数据
+    console.log('收到请求了')
     connectDataBase();
+    console.log('数据库连接正常')
     let sql="select * from menu";
     connection.query(sql, function (err, result) {
         if (err) {
