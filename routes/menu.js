@@ -149,7 +149,9 @@ router.post('/updateSubMenu', (req, res, next) => {
 })
 //查询二级菜单
 router.post('/getSubMenu', (req, res, next) => {
+    console.log('获取二级菜单')
     connectDataBase();
+    console.log('数据库连接成功')
     let id = req.body.id;
     console.log(id)
     let sql=`select subName from menu WHERE id=${id}`;
