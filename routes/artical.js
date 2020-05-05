@@ -4,13 +4,23 @@ const router = express.Router();
 const mysql = require('mysql');
 let connection
 
+// function connectDataBase() {
+//     //连接数据库数据
+//     connection = mysql.createConnection({
+//         host: 'localhost',
+//         user: 'root',
+//         password: 'gu413286',
+//         database: 'test'
+//     });
+//     connection.connect();
+// }
 function connectDataBase() {
     //连接数据库数据
     connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'gu413286',
-        database: 'test'
+        host: 'hdm721887290.my3w.com',
+        user: 'hdm721887290',
+        password: 'Gu413286',
+        database: 'hdm721887290_db'
     });
     connection.connect();
 }

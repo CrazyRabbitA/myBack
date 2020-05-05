@@ -4,13 +4,25 @@ const router = express.Router();
 const mysql = require('mysql');
 let connection
 
+
+
+// function connectDataBase() {
+//     //连接数据库数据
+//     connection = mysql.createConnection({
+//         host: '47.114.164.51',
+//         user: 'gc',
+//         password: 'Gu413286',
+//         database: 'blog'
+//     });
+//     connection.connect();
+// }
 function connectDataBase() {
     //连接数据库数据
     connection = mysql.createConnection({
-        host: '47.114.164.51',
-        user: 'gc',
+        host: 'hdm721887290.my3w.com',
+        user: 'hdm721887290',
         password: 'Gu413286',
-        database: 'blog'
+        database: 'hdm721887290_db'
     });
     connection.connect();
 }
@@ -32,6 +44,7 @@ router.post('/addMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 
 //删除菜单
@@ -51,6 +64,7 @@ router.post('/deleteMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 // 更新菜单
 router.post('/updateMenu', (req, res, next) => {
@@ -70,6 +84,7 @@ router.post('/updateMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 //查询菜单
 router.get('/getMenu', (req, res, next) => {
@@ -87,6 +102,7 @@ router.get('/getMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 // 增加二级菜单
 router.post('/addSubMenu', (req, res, next) => {
@@ -108,6 +124,7 @@ router.post('/addSubMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 // 删除二级菜单
 router.post('/deleteSubMenu', (req, res, next) => {
@@ -127,6 +144,7 @@ router.post('/deleteSubMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 // 修改二级菜单
 router.post('/updateSubMenu', (req, res, next) => {
@@ -146,6 +164,7 @@ router.post('/updateSubMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 //查询二级菜单
 router.post('/getSubMenu', (req, res, next) => {
@@ -171,6 +190,7 @@ router.post('/getSubMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
+    connection.end();
 })
 
 

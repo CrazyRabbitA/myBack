@@ -34,11 +34,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
 let menusRouter = require('./routes/menu');
 let articalRouter = require('./routes/artical');
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/menu', menusRouter);
 app.use('/artical', articalRouter);
 

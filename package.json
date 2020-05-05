@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "forever start ./bin/www",
-    "stop": "forever stop ./bin/www"
+    "stop": "forever stop ./bin/www",
+    "startNoKeep": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
