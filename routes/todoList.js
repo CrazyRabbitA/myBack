@@ -33,8 +33,7 @@ router.post('/addItem', (req, res, next) => {
     console.log('增加代办')
     let content = req.body.content;
     let type = req.body.type;
-    let time=moment().format('MMMM Do YYYY, h:mm:ss a');
-    let sql = `INSERT INTO todoList (content,type,updateTime) VALUES ("${content}","${type}","${time}")`
+    let sql = `INSERT INTO todoList (content,type) VALUES ("${content}","${type}")`
     connection.query(sql, function (err, result) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
@@ -78,8 +77,7 @@ router.post('/changeType', (req, res, next) => {
     connectDataBase();
     let id = req.body.id;
     let type = req.body.type;
-    let time=moment().format('MMMM Do YYYY, h:mm:ss a');
-    let sql = `UPDATE todoList SET type="${type=='1'?'0':'1'}",updateTime="${time}" WHERE id="${id}"`
+    let sql = `UPDATE todoList SET type="${type=='1'?'0':'1'}" WHERE id="${id}"`
     connection.query(sql, function (err, result) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
@@ -99,8 +97,7 @@ router.post('/editItem', (req, res, next) => {
     connectDataBase();
     let id = req.body.id;
     let content = req.body.content;
-    let time=moment().format('MMMM Do YYYY, h:mm:ss a');
-    let sql = `UPDATE todoList SET content="${content}",updateTime="${time}" WHERE id="${id}"`
+    let sql = `UPDATE todoList SET content="${content}" WHERE id="${id}"`
     connection.query(sql, function (err, result) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
@@ -115,8 +112,6 @@ router.post('/editItem', (req, res, next) => {
     });
     connection.end();
 })
-
-
 //删除内容
 router.post('/deleteItem', (req, res, next) => {
     connectDataBase();
@@ -136,96 +131,4 @@ router.post('/deleteItem', (req, res, next) => {
     });
     connection.end();
 })
-
-
-// 增加二级菜单
-router.post('/addSubMenu', (req, res, next) => {
-    console.log('增加子菜单')
-    connectDataBase();
-    let id=req.body.id;
-    let subName=req.body.subName;
-    console.log(id,subName)
-    let sql = `UPDATE menu SET subName="${subName}" WHERE id="${id}"`
-    connection.query(sql, function (err, result) {
-        if (err) {
-            console.log('[SELECT ERROR] - ', err.message);
-            return;
-        } else {
-            let data = {
-                desc: 'success'
-            }
-            let response = {code: 200, data};
-            res.send(JSON.stringify(response));
-        }
-    });
-    connection.end();
-})
-// 删除二级菜单
-router.post('/deleteSubMenu', (req, res, next) => {
-    let id=req.body.id;
-    let newSubMenu=req.body.newSubMenu;
-    console.log(id,newSubMenu)
-    let sql = `UPDATE menu SET subName="${newSubMenu}" WHERE id="${id}"`
-    connection.query(sql, function (err, result) {
-        if (err) {
-            console.log('[SELECT ERROR] - ', err.message);
-            return;
-        } else {
-            let data = {
-                desc: 'success'
-            }
-            let response = {code: 200, data};
-            res.send(JSON.stringify(response));
-        }
-    });
-    connection.end();
-})
-// 修改二级菜单
-router.post('/updateSubMenu', (req, res, next) => {
-    let id=req.body.id;
-    let newSubMenu=req.body.newSubMenu;
-    console.log(id,newSubMenu)
-    let sql = `UPDATE menu SET subName="${newSubMenu}" WHERE id="${id}"`
-    connection.query(sql, function (err, result) {
-        if (err) {
-            console.log('[SELECT ERROR] - ', err.message);
-            return;
-        } else {
-            let data = {
-                desc: 'success'
-            }
-            let response = {code: 200, data};
-            res.send(JSON.stringify(response));
-        }
-    });
-    connection.end();
-})
-//查询二级菜单
-router.post('/getSubMenu', (req, res, next) => {
-    console.log('获取二级菜单')
-    connectDataBase();
-    console.log('数据库连接成功')
-    let id = req.body.id;
-    console.log(id)
-    let sql=`select subName from menu WHERE id=${id}`;
-    console.log(sql)
-    connection.query(sql, function (err, result) {
-        console.log('开始查询二级菜单')
-        if (err) {
-            console.log('[SELECT ERROR] - ', err.message);
-            return;
-        } else {
-            console.dir(result)
-            let tempArr=[];
-            if(result[0].subName){
-                tempArr=result[0].subName.split('|');
-            }
-            let response = {code: 200, data: tempArr};
-            res.send(JSON.stringify(response));
-        }
-    });
-    connection.end();
-})
-
-
 module.exports = router;
