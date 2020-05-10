@@ -36,9 +36,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 let indexRouter = require('./routes/index');
 let menusRouter = require('./routes/menu');
 let articalRouter = require('./routes/artical');
+let todoListRouter = require('./routes/todoList');
 app.use('/', indexRouter);
 app.use('/menu', menusRouter);
 app.use('/artical', articalRouter);
+app.use('/todoList', todoListRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
