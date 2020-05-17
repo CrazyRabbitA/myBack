@@ -22,7 +22,8 @@ function connectDataBase() {
         host: 'hdm721887290.my3w.com',
         user: 'hdm721887290',
         password: 'Gu413286',
-        database: 'hdm721887290_db'
+        database: 'hdm721887290_db',
+        multipleStatements: true
     });
     connection.connect();
 }
@@ -130,8 +131,9 @@ router.post('/addSubMenu', (req, res, next) => {
 router.post('/deleteSubMenu', (req, res, next) => {
     let id=req.body.id;
     let newSubMenu=req.body.newSubMenu;
-    console.log(id,newSubMenu)
-    let sql = `UPDATE menu SET subName="${newSubMenu}" WHERE id="${id}"`
+    let title=req.body.title;
+    //删除二级菜单时也要把对应的文章删了
+    let sql = `UPDATE menu SET subName="${newSubMenu}" WHERE id="${id}";DELETE FROM artical WHERE title="${title}"`
     connection.query(sql, function (err, result) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
@@ -144,14 +146,15 @@ router.post('/deleteSubMenu', (req, res, next) => {
             res.send(JSON.stringify(response));
         }
     });
-    connection.end();
 })
 // 修改二级菜单
 router.post('/updateSubMenu', (req, res, next) => {
     let id=req.body.id;
     let newSubMenu=req.body.newSubMenu;
+    let title=req.body.title;
+    let oldTitle=req.body.oldTitle;
     console.log(id,newSubMenu)
-    let sql = `UPDATE menu SET subName="${newSubMenu}" WHERE id="${id}"`
+    let sql = `UPDATE menu SET subName="${newSubMenu}" WHERE id="${id}";UPDATE artical SET title="${title}" WHERE title="${oldTitle}";`
     connection.query(sql, function (err, result) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);

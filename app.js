@@ -38,11 +38,13 @@ let menusRouter = require('./routes/menu');
 let articalRouter = require('./routes/artical');
 let todoListRouter = require('./routes/todoList');
 let loginRouter = require('./routes/login');
+let blogRouter = require('./routes/blog');
 app.use('/', indexRouter);
 app.use('/menu', menusRouter);
 app.use('/artical', articalRouter);
 app.use('/todoList', todoListRouter);
 app.use('/login', loginRouter);
+app.use('/blog', blogRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
